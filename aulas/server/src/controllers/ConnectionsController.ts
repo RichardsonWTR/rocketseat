@@ -10,9 +10,7 @@ export default class ConnectionsController {
         await db('connections').insert({
             user_id: id
         })
-        return res.send({
-            message:'creating connection'
-        })
+        return res.status(201).send()
     }
 
     async Index(req: Request, res: Response){
