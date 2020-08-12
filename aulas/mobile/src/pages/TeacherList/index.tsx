@@ -4,13 +4,28 @@ import styles from './styles'
 
 import PageHeader from '../../components/PageHeader'
 import TeacherItem from '../../components/TeacherItem';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { ScrollView, TextInput, BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import {Feather} from '@expo/vector-icons'
 
 function TeacherList() {
-    const [isFiltersVisible, setIsFiltersVisible] = useState(true);
+    const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+
+    function handleToogleFiltersVisible(){
+        setIsFiltersVisible(!isFiltersVisible)
+    }
+
+    function handleSubmitButton(){
+        handleToogleFiltersVisible();
+    }
+
     return (
         <View style={styles.container}>
-            <PageHeader title="Proffys disponíveis">
+            <PageHeader title="Proffys disponíveis" 
+                headerRight={
+                    <BorderlessButton style={styles.filterButton} onPress={handleToogleFiltersVisible}>
+                        <Feather name="filter" size={25} color="#fff"/>
+                    </BorderlessButton>
+                }>
                 { isFiltersVisible && (
                     <View style={styles.searchForm}>
                     <View>
@@ -41,6 +56,10 @@ function TeacherList() {
                             />
                         </View>
                     </View>
+
+                    <RectButton style={styles.submitButton} onPress={handleSubmitButton}>
+                        <Text style={styles.submitButtonText}>Pesquisar</Text>
+                    </RectButton>
                 </View>
                 )}
             </PageHeader>

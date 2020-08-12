@@ -35,6 +35,26 @@ const styles = StyleSheet.create({
 
     inputBlock:{
         width: '48%'
+    },
+
+    filterButton:{
+        padding: 15
+    },
+
+    submitButton:{
+        backgroundColor: '#04d361',
+        height: 56,
+        borderRadius: 8,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 8
+    },
+
+    submitButtonText:{
+        color: '#fff',
+        fontFamily: 'Archivo_700Bold',
+        fontSize: 16
     }
 });
 
