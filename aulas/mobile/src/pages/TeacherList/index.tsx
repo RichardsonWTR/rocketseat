@@ -14,6 +14,7 @@ function TeacherList() {
     const [subject, setSubject] = useState('');
     const [weekday, setWeekday] = useState('');
     const [time, setTime] = useState('');
+
     function handleToogleFiltersVisible(){
         setIsFiltersVisible(!isFiltersVisible)
     }
