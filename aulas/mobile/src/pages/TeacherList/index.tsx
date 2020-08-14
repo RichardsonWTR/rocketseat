@@ -8,6 +8,7 @@ import TeacherItem ,{ Teacher } from '../../components/TeacherItem';
 import {  BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import {Feather} from '@expo/vector-icons'
 import api from '../../services/api';
+import { useFocusEffect } from '@react-navigation/native';
 
 function TeacherList() {
     const [isFiltersVisible, setIsFiltersVisible] = useState(false);
@@ -17,6 +18,11 @@ function TeacherList() {
     const [weekday, setWeekday] = useState('');
     const [time, setTime] = useState('');
 
+
+    useFocusEffect(()=>{
+        loadFavorites();
+    })
+    
     function loadFavorites(){
         AsyncStorage
             .getItem('favorites')
