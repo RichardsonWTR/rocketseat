@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { View, Image, Text } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import styles from './styles' 
@@ -14,13 +14,13 @@ function Landing(){
     const navigation  = useNavigation();
     const [totalConnections, setTotalConnections]= useState(0);
 
-    useEffect(()=>{
+    useFocusEffect(()=>{
         api.get('connections')
             .then(res => {
                 const { total } = res.data;
                 setTotalConnections(total);
             })
-    },[]);
+    });
 
     function handleNavigateToGiveClassesPage(){
         navigation.navigate('GiveClasses');
