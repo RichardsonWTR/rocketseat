@@ -28,12 +28,12 @@ const TeacherItem: React.FC<TeacherItemProps> = ({teacher, isFavorited: favorite
         Linking.openURL(`whatsapp://send?phone=${teacher.whatsapp}`)
     }
 
-    async function handleToggleFavoriteButton(newFavoritedState: boolean){
+    async function handleToggleFavoriteButton(){
         const favorites = await AsyncStorage.getItem('favorites')
         let favArray = favorites ? JSON.parse(favorites): []
+        let newFavoritedState = !isFavorited;
         if(newFavoritedState){
             favArray.push(teacher);
-            
         }else{
             const favIndex = favArray.findIndex((teacherItem : Teacher) =>{
                 teacherItem.id === teacher.id
@@ -70,11 +70,11 @@ const TeacherItem: React.FC<TeacherItemProps> = ({teacher, isFavorited: favorite
             
                 <View style={styles.buttonsContainer}>
                     { isFavorited ? (
-                        <RectButton style={[styles.favoriteButton, styles.favorited]} onPress={() => handleToggleFavoriteButton(false)}>
+                        <RectButton style={[styles.favoriteButton, styles.favorited]} onPress={handleToggleFavoriteButton}>
                             <Image source={unfavoriteIcon} />
                         </RectButton>
                     ): (
-                        <RectButton style={styles.favoriteButton} onPress={() => handleToggleFavoriteButton(true)}>
+                        <RectButton style={styles.favoriteButton} onPress={handleToggleFavoriteButton}>
                                 <Image source={heartOutlineIcon} />
                         </RectButton>
                     )}
