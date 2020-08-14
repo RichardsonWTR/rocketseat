@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { View,Text, AsyncStorage} from 'react-native';
+import { View,Text,ScrollView, TextInput } from 'react-native';
 import styles from './styles'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import PageHeader from '../../components/PageHeader'
 import TeacherItem ,{ Teacher } from '../../components/TeacherItem';
-import { ScrollView, TextInput, BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import {  BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import {Feather} from '@expo/vector-icons'
 import api from '../../services/api';
 
 function TeacherList() {
     const [isFiltersVisible, setIsFiltersVisible] = useState(false);
-    const [favorites, setFavorites] = useState<number[]>([]);
+    const [favoriteIds, setFavoritesIds] = useState<number[]>([]);
     const [teachers,setTeachers] = useState([]);
-    const [subject, setSubject] = useState('História');
-    const [weekday, setWeekday] = useState('0');
-    const [time, setTime] = useState('09:00');
+    const [subject, setSubject] = useState('');
+    const [weekday, setWeekday] = useState('');
+    const [time, setTime] = useState('');
 
     function loadFavorites(){
         AsyncStorage
@@ -23,7 +24,7 @@ function TeacherList() {
                 if(res){
                     const favoritedTeachers = JSON.parse(res);
                     const favoritedTeachersIds = favoritedTeachers.map((t : Teacher) => t.id)
-                    setFavorites(favoritedTeachersIds)
+                    setFavoritesIds(favoritedTeachersIds)
                 }
             })
     }
@@ -111,7 +112,7 @@ function TeacherList() {
                     <TeacherItem 
                         key={teacher.id}
                         teacher={teacher}
-                        isFavorited={favorites.includes(teacher.id)}/>
+                        isFavorited={favoriteIds.includes(teacher.id)}/>
                     )
                 })}
             </ScrollView>
